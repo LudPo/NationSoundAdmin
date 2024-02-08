@@ -5,9 +5,9 @@ namespace App\Controller\Admin;
 use App\Entity\Location;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\UrlField;
 
 class LocationCrudController extends AbstractCrudController
 {
@@ -24,7 +24,10 @@ class LocationCrudController extends AbstractCrudController
             AssociationField::new('locationCategory'),
             NumberField::new('latitude')->setNumDecimals(7),
             NumberField::new('longitude')->setNumDecimals(7),
-            UrlField::new('locationIcon'),
+            ImageField::new('locationIcon')
+                ->setBasePath('uploads/icons')
+                ->setUploadDir('public/uploads/icons')
+                ->setUploadedFileNamePattern('[randomhash].[extension]')
         ];
     }
 }

@@ -27,7 +27,7 @@ class Location
     #[ORM\Column(type: Types::DECIMAL, precision: 11, scale: 7)]
     private ?string $longitude = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 255)]
     private ?string $locationIcon = null;
 
     public function getId(): ?int

@@ -26,6 +26,7 @@ class LocationCategory
         $this->locations = new ArrayCollection();
     }
 
+    //Necessary for AssociationField in LocationCrud
     public function __toString(): string
     {
         return $this->locationCategory;

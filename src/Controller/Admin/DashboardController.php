@@ -2,9 +2,11 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Artist;
 use App\Entity\User;
 use App\Entity\LocationCategory;
 use App\Entity\Location;
+use App\Entity\MusicalGenre;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -48,6 +50,9 @@ class DashboardController extends AbstractDashboardController
             MenuItem::linkToCrud('Location Category', 'fas fa-tag', LocationCategory::class),
             MenuItem::linkToCrud('Location', 'fas fa-location-dot', Location::class),
 
+            MenuItem::section('Events'),
+            MenuItem::linkToCrud('Musical Genre', 'fas fa-music', MusicalGenre::class),
+            MenuItem::linkToCrud('Artist', 'fas fa-guitar', Artist::class),
 
         ];
     }
