@@ -26,6 +26,15 @@ class Artist
     #[ORM\Column(length: 255)]
     private ?string $artistImage = null;
 
+    #[ORM\OneToOne(mappedBy: 'artist', cascade: ['persist', 'remove'])]
+    private ?Event $event = null;
+
+    //Necessary for AssociationField in EventCrud
+    public function __toString(): string
+    {
+        return $this->artistName;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -75,6 +84,23 @@ class Artist
     public function setArtistImage(string $artistImage): static
     {
         $this->artistImage = $artistImage;
+
+        return $this;
+    }
+
+    public function getEvent(): ?Event
+    {
+        return $this->event;
+    }
+
+    public function setEvent(Event $event): static
+    {
+        // set the owning side of the relation if necessary
+        if ($event->getArtist() !== $this) {
+            $event->setArtist($this);
+        }
+
+        $this->event = $event;
 
         return $this;
     }

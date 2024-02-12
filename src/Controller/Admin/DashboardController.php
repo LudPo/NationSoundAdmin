@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Artist;
+use App\Entity\Event;
 use App\Entity\User;
 use App\Entity\LocationCategory;
 use App\Entity\Location;
@@ -53,6 +54,7 @@ class DashboardController extends AbstractDashboardController
             MenuItem::section('Events'),
             MenuItem::linkToCrud('Musical Genre', 'fas fa-music', MusicalGenre::class),
             MenuItem::linkToCrud('Artist', 'fas fa-guitar', Artist::class),
+            MenuItem::linkToCrud('Event', 'fas fa-calendar', Event::class),
 
         ];
     }
