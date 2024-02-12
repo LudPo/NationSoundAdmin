@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ArtistRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ArtistRepository::class)]
 class Artist
@@ -15,15 +16,19 @@ class Artist
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(["getEvents"])]
     private ?string $artistName = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(["getEvents"])]
     private ?string $excerpt = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(["getEvents"])]
     private ?string $description = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(["getEvents"])]
     private ?string $artistImage = null;
 
     #[ORM\OneToOne(mappedBy: 'artist', cascade: ['persist', 'remove'])]
