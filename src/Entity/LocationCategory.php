@@ -6,6 +6,7 @@ use App\Repository\LocationCategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: LocationCategoryRepository::class)]
 class LocationCategory
@@ -16,6 +17,7 @@ class LocationCategory
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(["getLocations"])]
     private ?string $locationCategory = null;
 
     #[ORM\OneToMany(mappedBy: 'locationCategory', targetEntity: Location::class)]

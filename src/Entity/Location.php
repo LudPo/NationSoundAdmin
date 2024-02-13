@@ -15,23 +15,28 @@ class Location
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(["getLocations"])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(["getEvents"])]
+    #[Groups(["getEvents","getLocations"])]
     private ?string $locationName = null;
 
     #[ORM\ManyToOne(inversedBy: 'locations')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(["getLocations"])]
     private ?LocationCategory $locationCategory = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 7)]
+    #[Groups(["getLocations"])]
     private ?string $latitude = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 11, scale: 7)]
+    #[Groups(["getLocations"])]
     private ?string $longitude = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(["getLocations"])]
     private ?string $locationIcon = null;
 
     #[ORM\OneToMany(targetEntity: Event::class, mappedBy: 'location')]
