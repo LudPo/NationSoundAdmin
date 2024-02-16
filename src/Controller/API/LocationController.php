@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\API;
+namespace App\Controller\Api;
 
 use App\Repository\LocationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
