@@ -21,7 +21,12 @@ class ArtistCrudController extends AbstractCrudController
         return [
             TextField::new('artistName'),
             TextareaField::new('excerpt'),
-            TextEditorField::new('description'),
+            TextEditorField::new('description')
+                ->setTrixEditorConfig([
+                    'blockAttributes'=>[
+                        'default'=>['tagName'=>'p']
+                    ]
+                ]),
             ImageField::new('artistImage')
                 ->setBasePath('uploads/images')
                 ->setUploadDir('public/uploads/images')
