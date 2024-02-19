@@ -34,6 +34,7 @@ class ImageUrlService
                 $artist->getArtistName(),
                 $artist->getExcerpt(),
                 $artist->getDescription(),
+                $artist->getSlug(),
                 $imageUrls
             );
     }

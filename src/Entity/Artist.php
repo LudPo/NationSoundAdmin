@@ -5,9 +5,11 @@ namespace App\Entity;
 use App\Repository\ArtistRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[ORM\Entity(repositoryClass: ArtistRepository::class)]
+#[UniqueEntity(['artistName', 'slug'])]
 class Artist
 {
     #[ORM\Id]
@@ -15,21 +17,20 @@ class Artist
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    #[Groups(["getEvents"])]
+    #[ORM\Column(length: 255, unique: true)]
     private ?string $artistName = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(["getEvents"])]
     private ?string $excerpt = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    #[Groups(["getEvents"])]
     private ?string $description = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(["getEvents"])]
     private ?string $artistImage = null;
+
+    #[ORM\Column(length: 255, nullable: true, unique: true)]
+    private ?string $slug = null;
 
     #[ORM\OneToOne(mappedBy: 'artist', cascade: ['persist', 'remove'])]
     private ?Event $event = null;
@@ -38,6 +39,16 @@ class Artist
     public function __toString(): string
     {
         return $this->artistName;
+    }
+
+    //Create slug to use in front
+    public function computeSlug(SluggerInterface $slugger)
+    {
+        if (!$this->artistName) {
+            return;
+        }
+
+        $this->slug = $slugger->slug($this->artistName)->lower()->toString();
     }
 
     public function getId(): ?int
@@ -92,6 +103,19 @@ class Artist
 
         return $this;
     }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): static
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
 
     public function getEvent(): ?Event
     {

@@ -25,7 +25,8 @@ class ArtistCrudController extends AbstractCrudController
             ImageField::new('artistImage')
                 ->setBasePath('uploads/images')
                 ->setUploadDir('public/uploads/images')
-                ->setUploadedFileNamePattern('[randomhash].[extension]')
+                ->setUploadedFileNamePattern('[randomhash].[extension]'),
+            TextField::new('slug')->hideOnForm()
         ];
     }
 }

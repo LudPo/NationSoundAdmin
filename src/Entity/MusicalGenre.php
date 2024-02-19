@@ -17,7 +17,6 @@ class MusicalGenre
     private ?int $id = null;
 
     #[ORM\Column(length: 255, unique: true)]
-    #[Groups(["getEvents"])]
     private ?string $musicalGenre = null;
 
     #[ORM\OneToMany(targetEntity: Event::class, mappedBy: 'musicalGenre')]

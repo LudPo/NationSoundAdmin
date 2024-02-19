@@ -19,7 +19,7 @@ class Location
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(["getEvents","getLocations"])]
+    #[Groups(["getLocations"])]
     private ?string $locationName = null;
 
     #[ORM\ManyToOne(inversedBy: 'locations')]
