@@ -2,6 +2,7 @@
 
 namespace App\Controller\Api;
 
+use App\DTO\LocationDTO;
 use App\Repository\LocationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -15,11 +16,23 @@ class LocationController extends AbstractController
     public function getLocations(LocationRepository $locationRepository, SerializerInterface $serializer): JsonResponse
     {
         $locations = $locationRepository->findAll();
-        $jsonLocations = $serializer->serialize(
-            $locations,
+        $locationDTOs = [];
+
+        foreach ($locations as $location) {
+            $locationDTOs[] = new LocationDTO(
+                $location->getId(),
+                $location->getLocationName(),
+                $location->getLocationCategory()->getLocationCategory(),
+                $location->getLatitude(),
+                $location->getLongitude(),
+                $location->getLocationIcon()
+            );
+        }
+
+        $jsonLocationDTOs = $serializer->serialize(
+            $locationDTOs,
             'json',
-            ['groups' => 'getLocations']
         );
-        return new JsonResponse($jsonLocations, Response::HTTP_OK, [], true);
+        return new JsonResponse($jsonLocationDTOs, Response::HTTP_OK, [], true);
     }
 }

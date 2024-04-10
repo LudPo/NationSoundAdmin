@@ -17,7 +17,6 @@ class LocationCategory
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(["getLocations"])]
     private ?string $locationCategory = null;
 
     #[ORM\OneToMany(mappedBy: 'locationCategory', targetEntity: Location::class)]
