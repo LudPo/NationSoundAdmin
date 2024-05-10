@@ -1,8 +1,21 @@
+# mercure:
+#     hubs:
+#         default:
+#             url: '%env(MERCURE_URL)%'
+#             public_url: '%env(MERCURE_PUBLIC_URL)%'
+#             jwt:
+#                 secret: '%env(MERCURE_JWT_SECRET)%'
+#                 publish: '*'
 mercure:
     hubs:
         default:
             url: '%env(MERCURE_URL)%'
             public_url: '%env(MERCURE_PUBLIC_URL)%'
+            # jwt:
+            #     secret: '%env(MERCURE_JWT_SECRET)%'
+            #     publish: '%env(MERCURE_PUBLISHER_JWT_KEY)%'
+            #     subscribe: '%env(MERCURE_SUBSCRIBER_JWT_KEY)%'
             jwt:
-                secret: '%env(MERCURE_JWT_SECRET)%'
-                publish: '*'
+                secret: '!ChangeThisMercureHubJWTSecretKey!'
+                algorithm: 'hmac.sha256'
+                value: 'eyJhbGciOiJIUzI1NiJ9.eyJtZXJjdXJlIjp7InB1Ymxpc2giOlsiKiJdLCJzdWJzY3JpYmUiOlsiaHR0cHM6Ly9uYXRpb25zb3VuZC5vbmxpbmUvbm90aWZpY2F0aW9ucy91cGRhdGVzIl19fQ.iBEQ0Hhst_10OCzOxS8DC3Mtzni1vUh0u_GIpC_fNmA'

@@ -41,14 +41,14 @@ class NotificationEventListener
         foreach ($notifications as $notif) {
             $data[] = [
                 'id' => $notif->getId(),
-                'headline' => $notif->getNotificationHeadline(),
-                'content' => $notif->getNotificationContent(),
+                'notificationHeadline' => $notif->getNotificationHeadline(),
+                'notificationContent' => $notif->getNotificationContent(),
                 'isMarquee' => $notif->getIsMarquee(),
             ];
         }
 
         $update = new Update(
-            'https://nationsound/notifications/updates',
+            'https://nationsound.online/notifications/updates',
             json_encode($data)
         );
 
