@@ -6,6 +6,8 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\PasswordStrength;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
@@ -22,10 +24,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private array $roles = ['ROLE_USER'];
 
     /**
-     * @var string The hashed password
+     * @var string The hashed pass
      */
     #[ORM\Column]
     private ?string $password = null;
+
+    #[Assert\PasswordStrength([
+        'minScore' => PasswordStrength::STRENGTH_STRONG,
+        'message' => 'Pour garantir la sécurité de votre compte, veuillez créer un mot de passe qui soit difficile à deviner. Utilisez au moins 12 caractères, comprenant une combinaison de lettres majuscules et minuscules, de chiffres et de symboles (comme !, @, #, $). L\'utilisation de phrases secrètes, composées de plusieurs mots imprévisibles, augmente également la sécurité de votre mot de passe.'
+    ])]
+    protected $plainPassword;
+    // private ?string $plainPassword = null;
 
     public function getId(): ?int
     {
@@ -62,7 +71,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
-
         return array_unique($roles);
     }
 
@@ -88,12 +96,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword(?string $plainPassword): self
+    {
+        $this->plainPassword = $plainPassword;
+
+        return $this;
+    }
+
     /**
      * @see UserInterface
      */
     public function eraseCredentials(): void
     {
         // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
+        $this->plainPassword = null;
     }
 }
