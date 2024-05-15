@@ -8,8 +8,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use App\Controller\Admin\BaseAdminController;
 
-class LocationCrudController extends AbstractCrudController
+class LocationCrudController extends BaseAdminController
 {
     public static function getEntityFqcn(): string
     {

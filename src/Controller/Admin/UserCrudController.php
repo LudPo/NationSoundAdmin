@@ -7,8 +7,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use App\Controller\Admin\BaseAdminController;
 
-class UserCrudController extends AbstractCrudController
+class UserCrudController extends BaseAdminController
 {
     public static function getEntityFqcn(): string
     {
@@ -20,6 +21,7 @@ class UserCrudController extends AbstractCrudController
         $rolesChoices = [
             'User' => 'ROLE_USER',
             'Admin' => 'ROLE_ADMIN',
+            'SuperAdmin' => 'ROLE_SUPER_ADMIN'
         ];
 
         return [

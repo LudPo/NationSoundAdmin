@@ -7,8 +7,9 @@ use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
+use App\Controller\Admin\BaseAdminController;
 
-class EventCrudController extends AbstractCrudController
+class EventCrudController extends BaseAdminController
 {
     public static function getEntityFqcn(): string
     {

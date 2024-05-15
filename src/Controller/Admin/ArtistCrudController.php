@@ -3,13 +3,14 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Artist;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
-class ArtistCrudController extends AbstractCrudController
+use App\Controller\Admin\BaseAdminController;
+
+class ArtistCrudController extends BaseAdminController
 {
     public static function getEntityFqcn(): string
     {
@@ -23,8 +24,8 @@ class ArtistCrudController extends AbstractCrudController
             TextareaField::new('excerpt'),
             TextEditorField::new('description')
                 ->setTrixEditorConfig([
-                    'blockAttributes'=>[
-                        'default'=>['tagName'=>'p']
+                    'blockAttributes' => [
+                        'default' => ['tagName' => 'p']
                     ]
                 ]),
             ImageField::new('artistImage')

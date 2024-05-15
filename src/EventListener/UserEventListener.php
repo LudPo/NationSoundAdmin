@@ -22,11 +22,13 @@ class UserEventListener
 
     public function prePersist(User $user, LifecycleEventArgs $args)
     {
+        error_log('prePersist is triggered');
         $this->hashPassword($user);
     }
 
     public function preUpdate(User $user, LifecycleEventArgs $args)
     {
+        error_log('preUpdate is triggered');
         $this->hashPassword($user);
     }
     private function hashPassword(User $user)
